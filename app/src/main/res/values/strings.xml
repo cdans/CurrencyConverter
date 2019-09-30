@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Currency Converter</string>
+
+    <string name="button">Button</string>
+    <string name="FirstActivity">First Activity</string>
+    <string name="textfield">Text Field</string>
+
+</resources>
