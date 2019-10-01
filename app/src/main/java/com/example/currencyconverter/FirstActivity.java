@@ -39,7 +39,7 @@ public class FirstActivity extends AppCompatActivity {
 
     public void runSecondActivity (boolean b){
         Intent intent = new Intent(context, SecondActivity.class);
-        Intent.putExtra("flag", b);
+        intent.putExtra("flag", b);
         context.startActivity(intent);
     }
 
