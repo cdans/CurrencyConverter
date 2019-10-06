@@ -9,7 +9,16 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <Button
+        android:id="@+id/listTransferButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/listTransferButton"
+        app:layout_constraintBottom_toTopOf="@+id/addButton" />
 
     <Button
         android:id="@+id/addButton"

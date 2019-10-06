@@ -2,6 +2,7 @@ package com.example.currencyconverter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,6 +18,7 @@ public class SecondActivity extends AppCompatActivity {
     private ListView myList;
     private ListAdapter adapter;
     private Button addButton;
+    private Button listTransferButton;
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -25,6 +27,8 @@ public class SecondActivity extends AppCompatActivity {
         setContentView (R.layout.secondactivitydesign);
         myList = (ListView) findViewById(R.id.listView);
         addButton = (Button) findViewById(R.id.addButton);
+        listTransferButton = (Button) findViewById(R.id.listTransferButton);
+
 
         final List<ListItem> items = new ArrayList<>();
 
@@ -54,6 +58,19 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View v) {
                 items.add(new ListItem("Euro", R.drawable.euro, "The euro is the official currency of 19 of the 28 member states of the European Union. This group of states is known as the eurozone or euro area, and counts about 343 million citizens as of 2019. The euro, which is divided into 100 cents, is the second-largest and second-most traded currency in the foreign exchange market after the United States dollar."));
                 myList.setAdapter(adapter);
+            }
+        });
+
+
+        listTransferButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+            Intent intent = new Intent(SecondActivity.this, ListAgain.class);
+            intent.putParcelableArrayListExtra("EXTRA_LIST", (ArrayList<? extends Parcelable>) items);
+
+                startActivity(intent);
+
             }
         });
 
