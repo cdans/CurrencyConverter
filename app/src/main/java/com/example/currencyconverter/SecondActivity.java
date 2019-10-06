@@ -62,16 +62,15 @@ public class SecondActivity extends AppCompatActivity {
         });
 
 
+
         listTransferButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-            Intent intent = new Intent(SecondActivity.this, ListAgain.class);
-            intent.putParcelableArrayListExtra("EXTRA_LIST", (ArrayList<? extends Parcelable>) items);
-
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), ListAgain.class);
+                intent.putParcelableArrayListExtra("EXTRA_LIST", (ArrayList<? extends Parcelable>) items);
                 startActivity(intent);
-
             }
+
         });
 
         }

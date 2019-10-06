@@ -21,7 +21,7 @@ public class ListAgain extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        ArrayList items = intent.getIntegerArrayListExtra("EXTRA_INTENT");
+        ArrayList items = intent.getIntegerArrayListExtra("EXTRA_LIST");
 
         adapter = new ListAdapter(this, items);
         myListView.setAdapter(adapter);
