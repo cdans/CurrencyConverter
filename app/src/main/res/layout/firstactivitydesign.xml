@@ -1,33 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="273dp"
-        android:layout_height="111dp"
-        android:text="Button"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="6dp" />
 
-    <Button
-        android:id="@+id/secondActivityButton"
-        android:layout_width="275dp"
-        android:layout_height="133dp"
-        android:text="Second Activity"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="125dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="131dp"
-        android:layout_height="45dp"
-        android:text="Text Field"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="120dp" />
+        <Button
+            android:id="@+id/secondActivityButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/secondActivityButton" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/removeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/removeButton" />
+
+        <TextView
+            android:id="@+id/textfield"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textfield" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="In most cases, a central bank has a monopoly right to issue of coins and banknotes (fiat money) for its own area of circulation (a country or group of countries); it regulates the production of currency by banks (credit) through monetary policy.
+
+An exchange rate is a price at which two currencies can be exchanged against each other. This is used for trade between the two currency zones. Exchange rates can be classified as either floating or fixed. In the former, day-to-day movements in exchange rates are determined by the market; in the latter, governments intervene in the market to buy or sell their currency to balance supply and demand at a static exchange rate.
+
+In cases where a country has control of its own currency, that control is exercised either by a central bank or by a Ministry of Finance. The institution that has control of monetary policy is referred to as the monetary authority. Monetary authorities have varying degrees of autonomy from the governments that create them. A monetary authority is created and supported by its sponsoring government, so independence can be reduced by the legislative or executive authority that creates it.
+
+Several countries can use the same name for their own separate currencies (for example, a dollar in Australia, Canada, and the United States). By contrast, several countries can also use the same currency (for example, the euro or the CFA franc), or one country can declare the currency of another country to be legal tender. For example, Panama and El Salvador have declared US currency to be legal tender, and from 1791 to 1857, Spanish silver coins were legal tender in the United States. At various times countries have either re-stamped foreign coins or used currency boards, issuing one note of currency for each note of a foreign government held, as Ecuador currently does.
+
+Each currency typically has a main currency unit (the dollar, for example, or the euro) and a fractional unit, often defined as ​1⁄100 of the main unit: 100 cents = 1 dollar, 100 centimes = 1 franc, 100 pence = 1 pound, although units of ​1⁄10 or ​1⁄1000 occasionally also occur. Some currencies do not have any smaller units at all, such as the Icelandic króna.
+
+Mauritania and Madagascar are the only remaining countries that have theoretical fractional units not based on the decimal system; instead, the Mauritanian ouguiya is in theory divided into 5 khoums, while the Malagasy ariary is theoretically divided into 5 iraimbilanja. In these countries, words like dollar or pound were simply names for given weights of gold.[12] Due to inflation khoums and iraimbilanja have in practice fallen into disuse. (See non-decimal currencies for other historic currencies with non-decimal divisions.)
+"/>
+
+
+
+    </LinearLayout>
+</ScrollView>

@@ -2,7 +2,14 @@
     <string name="app_name">Currency Converter</string>
 
     <string name="button">Button</string>
-    <string name="FirstActivity">First Activity</string>
-    <string name="textfield">Text Field</string>
+    <string name="secondActivityButton">Currencies</string>
+    <string name="textfield">Welcome!</string>
+    <string name="listview">List View</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="removeButton">Remove</string>
+    <string name="addButton">Add</string>
+    <string name="listTransferButton">List Transfer</string>
+
 
 </resources>
