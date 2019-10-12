@@ -10,21 +10,20 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="105dp" />
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="102dp">
 
-    <Button
-        android:id="@+id/listTransferButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/listTransferButton"
-        app:layout_constraintBottom_toTopOf="@+id/addButton" />
+    </ListView>
 
     <Button
         android:id="@+id/addButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/addButton"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@
     <string name="description">Description</string>
     <string name="title">Title</string>
     <string name="removeButton">Remove</string>
-    <string name="addButton">Add</string>
+    <string name="addButton">+</string>
     <string name="listTransferButton">List Transfer</string>
 
 
