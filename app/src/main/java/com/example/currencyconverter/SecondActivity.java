@@ -2,7 +2,6 @@ package com.example.currencyconverter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,7 +28,7 @@ public class SecondActivity extends AppCompatActivity {
         setContentView (R.layout.secondactivitydesign);
         myListView = (ListView) findViewById(R.id.listView);
         addButton = (Button) findViewById(R.id.addButton);
-        listTransferButton = (Button) findViewById(R.id.listTransferButton);
+       // listTransferButton = (Button) findViewById(R.id.listTransferButton);
 
 
         final List<ListItem> items = new ArrayList<>();
@@ -76,7 +75,7 @@ public class SecondActivity extends AppCompatActivity {
 
 
 
-        listTransferButton.setOnClickListener(new View.OnClickListener() {
+       /* listTransferButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ListAgain.class);
@@ -85,6 +84,7 @@ public class SecondActivity extends AppCompatActivity {
             }
 
         });
+        */
 
         }
 }
