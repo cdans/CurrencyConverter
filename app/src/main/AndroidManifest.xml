@@ -36,6 +36,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SecondActivity" />
         </activity>
+        <activity
+            android:name=".AddCurrencyActivity"
+            android:parentActivityName=".SecondActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SecondActivity" />
+        </activity>
     </application>
 
 </manifest>

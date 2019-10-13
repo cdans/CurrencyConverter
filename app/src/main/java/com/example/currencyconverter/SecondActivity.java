@@ -11,17 +11,17 @@ import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SecondActivity extends AppCompatActivity {
 
-    private ListView myListView;
-    private ListAdapter adapter;
+    //public static ArrayList<ListItem> items;
+    public static ListView myListView;
+    public static ListAdapter adapter;
     private ImageButton addButton;
     private Button listTransferButton;
     private SearchView searchView;
-    //public List<ListItem> items = MainActivity.items;
+    public List<ListItem> items = MainActivity.items;
 
 
     @Override
@@ -35,9 +35,9 @@ public class SecondActivity extends AppCompatActivity {
        // listTransferButton = (Button) findViewById(R.id.listTransferButton);
 
 
-        final List<ListItem> items = new ArrayList<>();
-        items.add(new ListItem("Euro", R.drawable.euro, "The euro is the official currency of 19 of the 28 member states of the European Union. This group of states is known as the eurozone or euro area, and counts about 343 million citizens as of 2019. The euro, which is divided into 100 cents, is the second-largest and second-most traded currency in the foreign exchange market after the United States dollar."));
-        items.add(new ListItem("United States dollar", R.drawable.dollar, "The United States dollar is the official currency of the United States and its territories per the United States Constitution since 1792. In practice, the dollar is divided into 100 smaller cent (¢) units, but is occasionally divided into 1000 mills (₥) for accounting. The circulating paper money consists of Federal Reserve Notes that are denominated in United States dollars."));
+        //final List<ListItem> items = new ArrayList<>();
+        //items.add(new ListItem("Euro", R.drawable.euro, "The euro is the official currency of 19 of the 28 member states of the European Union. This group of states is known as the eurozone or euro area, and counts about 343 million citizens as of 2019. The euro, which is divided into 100 cents, is the second-largest and second-most traded currency in the foreign exchange market after the United States dollar."));
+        //items.add(new ListItem("United States dollar", R.drawable.dollar, "The United States dollar is the official currency of the United States and its territories per the United States Constitution since 1792. In practice, the dollar is divided into 100 smaller cent (¢) units, but is occasionally divided into 1000 mills (₥) for accounting. The circulating paper money consists of Federal Reserve Notes that are denominated in United States dollars."));
 
 
         adapter = new ListAdapter(this, items);
@@ -72,8 +72,12 @@ public class SecondActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                items.add(new ListItem("Euro", R.drawable.euro, "The euro is the official currency of 19 of the 28 member states of the European Union. This group of states is known as the eurozone or euro area, and counts about 343 million citizens as of 2019. The euro, which is divided into 100 cents, is the second-largest and second-most traded currency in the foreign exchange market after the United States dollar."));
-                myListView.setAdapter(adapter);
+                //items.add(new ListItem("Euro", R.drawable.euro, "The euro is the official currency of 19 of the 28 member states of the European Union. This group of states is known as the eurozone or euro area, and counts about 343 million citizens as of 2019. The euro, which is divided into 100 cents, is the second-largest and second-most traded currency in the foreign exchange market after the United States dollar."));
+                //myListView.setAdapter(adapter);
+
+                Intent intent = new Intent(SecondActivity.this, AddCurrencyActivity.class);
+
+                startActivity(intent);
             }
         });
 
