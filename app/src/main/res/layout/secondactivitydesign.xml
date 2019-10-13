@@ -24,8 +24,7 @@
         android:background="@drawable/circle_background"
         android:backgroundTint="#006400"
         android:src="@android:drawable/ic_input_add"
-        android:text="@string/addButton"
-        app:layout_constraintBottom_toBottomOf="@+id/listView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
