@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -36,13 +36,17 @@
                     android:id="@+id/secondActivityButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/secondActivityButton" />
+                    android:background="#006400"
+                    android:text="@string/secondActivityButton"
+                    android:textColor="#FFFFFF" />
 
                 <Button
                     android:id="@+id/removeButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/removeButton" />
+                    android:background="#006400"
+                    android:text="@string/removeButton"
+                    android:textColor="#FFFFFF" />
 
                 <TextView
                     android:layout_width="match_parent"
