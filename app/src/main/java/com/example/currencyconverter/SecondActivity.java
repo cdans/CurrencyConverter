@@ -21,7 +21,7 @@ public class SecondActivity extends AppCompatActivity {
     private ImageButton addButton;
     private Button listTransferButton;
     private SearchView searchView;
-    public List<ListItem> items = MainActivity.items;
+    public List<ListItem> items = HomeActivity.items;
 
 
     @Override

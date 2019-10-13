@@ -31,7 +31,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
                 String strname = name.getText().toString();
                 String strdescription = description.getText().toString();
 
-                MainActivity.items.add(new ListItem(strname, R.drawable.comingsoon,  strdescription));
+                HomeActivity.items.add(new ListItem(strname, R.drawable.comingsoon,  strdescription));
 
                 Intent intent = new Intent(AddCurrencyActivity.this, SecondActivity.class);
 
