@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,7 @@ public class SecondActivity extends AppCompatActivity {
 
     private ListView myListView;
     private ListAdapter adapter;
-    private Button addButton;
+    private ImageButton addButton;
     private Button listTransferButton;
     //public List<ListItem> items = MainActivity.items;
 
@@ -27,7 +28,7 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView (R.layout.secondactivitydesign);
         myListView = (ListView) findViewById(R.id.listView);
-        addButton = (Button) findViewById(R.id.addButton);
+        addButton = (ImageButton) findViewById(R.id.addButton);
        // listTransferButton = (Button) findViewById(R.id.listTransferButton);
 
 
