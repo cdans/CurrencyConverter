@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void run(){
                 try {
-                    sleep(1500);
+                    sleep(2500);
                     Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();

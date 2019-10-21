@@ -7,16 +7,14 @@
     android:background="@color/colorPrimary"
     tools:context=".HomeActivity">
 
-
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="146dp"
-        android:layout_height="139dp"
+        android:layout_width="360dp"
+        android:layout_height="588dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/currencyconvertericon" />
-
-
+        app:layout_constraintVertical_bias="0.463"
+        app:srcCompat="@drawable/dollarsign" />
 </androidx.constraintlayout.widget.ConstraintLayout>
