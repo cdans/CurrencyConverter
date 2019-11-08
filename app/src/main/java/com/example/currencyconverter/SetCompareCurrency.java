@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-public class ChooseCurrency extends AppCompatActivity {
+public class SetCompareCurrency extends AppCompatActivity {
 
     public static ListView myListView;
     public static ListAdapter adapter;
@@ -25,7 +25,7 @@ public class ChooseCurrency extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        setContentView (R.layout.activity_choose_currency);
+        setContentView (R.layout.activity_set_compare_currency);
 
         Intent receivedIntent = getIntent();
         final String button = receivedIntent.getStringExtra(EXTRA_BUTTON);
@@ -41,22 +41,14 @@ public class ChooseCurrency extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int index = items.get(position).getImageId();
-                if (button.equals("buttonCurrencyOne")) {
+                    AddCurrencyActivity.textCompareCurrency.setText(items.get(position).getTitle());
+                    AddCurrencyActivity.setCompareCurrencyButton.setText(items.get(position).getTitle());
 
-                    MainActivity.buttonCurrencyOne.setText(items.get(position).getTitle());
-                }
-                else{
-
-                    MainActivity.buttonCurrencyTwo.setText(items.get(position).getTitle());
-
-                }
-                //MainActivity.buttonCurrencyOne.drawable
+                //AddCurrencyActivity.setCompareCurrencyButton.drawable
                 finish();
-                //startActivity(intent);
             }
         });
 
 
-            }
-        }
+    }
+}
