@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RequestOperator.RequestOperatorListener {
 
     Button secondActivityButton;
     Button sendRequestButton;
@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView title;
     TextView bodyText;
+
+    private ModelPost publication;
 
 
     @Override
@@ -78,7 +80,36 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void sendRequest(){
+        RequestOperator ro = new RequestOperator();
+        ro.setListener(this);
+        ro.start();
+    }
 
+    public void updatePublication(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (publication != null){
+                    title.setText(publication.getTitle());
+                    bodyText.setText(publication.getBodyText());
+                } else{
+                    title.setText("");
+                    bodyText.setText("");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void success(ModelPost publication) {
+        this.publication = publication;
+        updatePublication();
+    }
+
+    @Override
+    public void failed(int responseCode) {
+        this.publication = null;
+        updatePublication();
     }
 
 }

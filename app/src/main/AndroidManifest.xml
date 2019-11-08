@@ -2,35 +2,39 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.currencyconverter">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/currencyconvertericon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SetCompareCurrency"></activity>
         <activity android:name=".MainActivity" />
+
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SecondActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SecondActivity" />
+                android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".ChooseCurrency"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SecondActivity" />
+                android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".DetailActivity"
             android:parentActivityName=".SecondActivity">
@@ -38,6 +42,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SecondActivity" />
         </activity>
+
         <activity
             android:name=".ListAgain"
             android:parentActivityName=".SecondActivity">
@@ -45,6 +50,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SecondActivity" />
         </activity>
+
         <activity
             android:name=".AddCurrencyActivity"
             android:parentActivityName=".SecondActivity">
@@ -52,6 +58,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SecondActivity" />
         </activity>
+
+        <activity
+            android:name=".SetCompareCurrency"
+            android:parentActivityName=".AddCurrencyActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AddCurrencyActivity" />
+        </activity>
+
     </application>
 
 </manifest>
