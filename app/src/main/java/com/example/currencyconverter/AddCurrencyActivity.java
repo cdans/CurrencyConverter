@@ -52,7 +52,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String strname = name.getText().toString();
-                String strUnit = textCompareCurrency.getText().toString();
+                String strUnit = comparison.getText().toString();
 
 
                 if (strname.isEmpty() || strUnit.isEmpty() || setCompareCurrencyButton.getText()=="Set compare currency"){
@@ -61,7 +61,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
                 }
                 else{
 
-                    HomeActivity.items.add(new ListItem(strname, R.drawable.comingsoon,  "Empty"));
+                    HomeActivity.items.add(new ListItem(strname, R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
 
                     Intent intent = new Intent(AddCurrencyActivity.this, SecondActivity.class);
 

@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
     public static ProgressBar progressBar;
 
+    TextView numberItemsJSON;
+
     TextView title;
     TextView bodyText;
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        numberItemsJSON = (TextView) findViewById(R.id.numberItemsJSON);
         title = (TextView) findViewById(R.id.title);
         bodyText = (TextView) findViewById(R.id.body_text);
 
@@ -96,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
         RequestOperator ro = new RequestOperator();
         ro.setListener(this);
         ro.start();
+
+        String strListSize = Integer.toString(RequestOperator.listSize);
+        numberItemsJSON.setText(strListSize);
     }
 
     public void updatePublication(){

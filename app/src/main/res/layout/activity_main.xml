@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="#006400"
+            android:background="@drawable/button_default"
             android:drawableLeft="@android:drawable/ic_menu_add"
             android:text="set currency"
             android:textColor="#F9F9F9" />
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="#006400"
+            android:background="@drawable/button_default"
             android:drawableRight="@android:drawable/ic_menu_add"
             android:text="set currency"
             android:textColor="#F9F9F9" />
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:background="#006400"
+                    android:background="@drawable/button_default"
                     android:text="@string/secondActivityButton"
                     android:textColor="#F9F9F9" />
 

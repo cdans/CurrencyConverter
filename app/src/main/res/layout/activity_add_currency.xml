@@ -27,7 +27,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="#006400 "
+        android:background="@drawable/button"
         android:text="Set compare currency"
         android:textColor="#F9F9F9" />
 
@@ -45,7 +45,8 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:text="One unit of your currency are" />
+            android:text="One unit of your currency are"
+            android:textSize="18sp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editComparison"
@@ -67,7 +68,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -79,7 +81,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="#006400 "
+        android:background="@drawable/button"
         android:text="Submit"
         android:textColor="#F9F9F9" />
 

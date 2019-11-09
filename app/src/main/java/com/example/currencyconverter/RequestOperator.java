@@ -11,6 +11,8 @@ import java.net.URL;
 
 public class RequestOperator extends Thread {
 
+    public static int listSize = 100;
+
     public interface RequestOperatorListener{
         void success (ModelPost publication);
         void failed (int responseCode);
@@ -47,16 +49,20 @@ public class RequestOperator extends Thread {
 
         //URL address
         URL obj = new URL ("https://jsonplaceholder.typicode.com/posts/1");
+        URL list = new URL ("https://jsonplaceholder.typicode.com/posts");
 
         //Executor
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
+        HttpURLConnection conList = (HttpURLConnection) list.openConnection();
 
         //Determined what method will be used (GET, POST, PUT, or DELETE)
         con.setRequestMethod("GET");
+        conList.setRequestMethod("GET");
 
         //Determine the content type. In this case, it is a JSON variable
         con.setRequestProperty("Content-Type", "application/json");
+        conList.setRequestProperty("Content-Type", "application/json");
+        //listSize = conList.getContentLength();
 
         //Make request and receive a response
         responseCode = con.getResponseCode();
