@@ -35,7 +35,7 @@ public class IndicatingView extends View {
                 paint.setStrokeWidth(20f);
                 //Checkmark
                 canvas.drawLine(0,0,width/2, height, paint);
-                canvas.drawLine(0, height, width, 0, paint);
+                canvas.drawLine(width/2, height, width, height/2, paint);
                 break;
 
             case FAILED:

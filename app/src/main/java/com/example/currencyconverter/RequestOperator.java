@@ -25,6 +25,8 @@ public class RequestOperator extends Thread {
     public void run(){
         super.run();
         try{
+            sleep(2000);
+
             ModelPost publication = request ();
             if (publication!=null){
                 success(publication);
@@ -36,6 +38,8 @@ public class RequestOperator extends Thread {
             failed(-1);
         }catch (JSONException e){
             failed(-2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -46,6 +50,7 @@ public class RequestOperator extends Thread {
 
         //Executor
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
 
         //Determined what method will be used (GET, POST, PUT, or DELETE)
         con.setRequestMethod("GET");

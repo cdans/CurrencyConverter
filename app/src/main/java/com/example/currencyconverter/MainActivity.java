@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,10 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     Button sendRequestButton;
     public static Button buttonCurrencyOne;
     public static Button buttonCurrencyTwo;
+
+    private IndicatingView indicator;
+
+    public static ProgressBar progressBar;
 
     TextView title;
     TextView bodyText;
@@ -33,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
         buttonCurrencyOne = (Button) findViewById(R.id.buttonCurrencyOne);
         buttonCurrencyTwo = (Button) findViewById(R.id.buttonCurrencyTwo);
+
+        indicator = (IndicatingView) findViewById(R.id.generated_graphic);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         title = (TextView) findViewById(R.id.title);
         bodyText = (TextView) findViewById(R.id.body_text);
@@ -80,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     };
 
     private void sendRequest(){
+        setIndicatorStatus(IndicatingView.SUCCESS);
+
+        progressBar.setVisibility(View.VISIBLE);
+
         RequestOperator ro = new RequestOperator();
         ro.setListener(this);
         ro.start();
@@ -93,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
                     title.setText(publication.getTitle());
                     bodyText.setText(publication.getBodyText());
                 } else{
-                    title.setText("");
+                    title.setText("FAILED");
                     bodyText.setText("");
                 }
             }
@@ -104,12 +117,25 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     public void success(ModelPost publication) {
         this.publication = publication;
         updatePublication();
+        setIndicatorStatus(IndicatingView.SUCCESS);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void failed(int responseCode) {
         this.publication = null;
         updatePublication();
+        setIndicatorStatus(IndicatingView.FAILED);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
+    public void setIndicatorStatus (final int status){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                indicator.setState(status);
+                indicator.invalidate();
+            }
+        });
+    }
 }
