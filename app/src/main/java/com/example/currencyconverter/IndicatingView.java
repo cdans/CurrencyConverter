@@ -2,8 +2,8 @@ package com.example.currencyconverter;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -11,6 +11,8 @@ public class IndicatingView extends View {
     public static final int NOTEEXECUTED = 0;
     public static final int SUCCESS = 1;
     public static final int FAILED = 2;
+    public static final int LINE1 = 3;
+    public static final int LINE2 = 4;
 
     int state = NOTEEXECUTED;
 
@@ -32,17 +34,19 @@ public class IndicatingView extends View {
             case SUCCESS:
                 paint = new Paint();
                 paint.setColor(Color.GREEN);
+                paint.setStyle(Paint.Style.FILL_AND_STROKE);
                 paint.setStrokeWidth(20f);
                 //Checkmark
-                canvas.drawLine(0,0,width/2, height, paint);
-                canvas.drawLine(width/2, height, width, height/2, paint);
+                //canvas.drawLine(0,0,width/2, height, paint);
+                //canvas.drawLine(width/2, height, width, height/2, paint);
+                canvas.drawRect(width/4,height/4,width/4*3,height/4*3, paint);
                 break;
 
             case FAILED:
                 paint = new Paint();
                 paint.setColor(Color.RED);
                 paint.setStrokeWidth(20f);
-                //Checkmark
+                //Cross
                 canvas.drawLine(0,0,width, height, paint);
                 canvas.drawLine(0, height, width, 0, paint);
                 break;

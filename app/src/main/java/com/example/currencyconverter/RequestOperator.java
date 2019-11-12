@@ -11,58 +11,118 @@ import java.net.URL;
 
 public class RequestOperator extends Thread {
 
-    public static int listSize = 100;
+    public interface RequestOperatorListener {
+        void success(ModelPost publication);
 
-    public interface RequestOperatorListener{
-        void success (ModelPost publication);
-        void failed (int responseCode);
+        void failed(int responseCode);
+        void addPostsNumber(int countPosts);
     }
 
     private RequestOperatorListener listener;
     private int responseCode;
 
-    public void setListener (RequestOperatorListener listener) { this.listener = listener; }
+    public void setListener(RequestOperatorListener listener) {
+        this.listener = listener;
+    }
 
     @Override
-    public void run(){
+    public void run() {
         super.run();
-        try{
+        try {
             sleep(2000);
-
-            ModelPost publication = request ();
-            if (publication!=null){
+            ModelPost publication = request();
+            String jsnString = request2();
+            if (publication != null) {
                 success(publication);
+                addPostsNumber(this.countPosts(jsnString));
+            } else {
+                failed(responseCode);
             }
-            else{
-                failed (responseCode);
-            }
-        }catch (IOException e){
+        } catch (IOException e) {
             failed(-1);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             failed(-2);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private ModelPost request() throws IOException, JSONException{
+     private void addPostsNumber(int countPosts) {
+         if (listener!=null){
+             listener.addPostsNumber(countPosts);
+         }
+     }
+
+     private int countPosts(String jsnString) {
+         int counter = 0;
+         char c;
+         for(int i = 0; i < jsnString.length(); i++) {
+             c = jsnString.charAt(i);
+             if(c == '{') counter++;
+         }
+         return counter;
+     }
+
+     private String request2() throws IOException, JSONException {
+         //URL address
+         URL obj = new URL ("https://jsonplaceholder.typicode.com/posts");
+
+         //Executor
+         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+         //Determined what method will be used (GET, POST, PUT, or DELETE)
+         con.setRequestMethod("GET");
+
+         //Determine the content type. In this case, it is a JSON variable
+         con.setRequestProperty("Content-Type", "application/json");
+
+         //Make request and receive a response
+         responseCode = con.getResponseCode();
+         System.out.println("Response Code: " + responseCode);
+
+         InputStreamReader streamReader;
+
+         //If response okay, using InputStream
+         //If not, using error stream
+         if(responseCode==200){
+             streamReader = new InputStreamReader(con.getInputStream());
+         }else {
+             streamReader = new InputStreamReader(con.getErrorStream());
+         }
+
+         BufferedReader in = new BufferedReader(streamReader);
+         String inputLine;
+         StringBuffer response = new StringBuffer();
+
+         while ((inputLine = in.readLine()) != null){
+             response.append(inputLine);
+         }
+         in.close();
+
+         //print Result
+         System.out.println(response.toString());
+
+         if (responseCode==200){
+             return response.toString();
+         }
+         else{
+             return null;
+         }
+     }
+
+    private ModelPost request() throws IOException, JSONException {
 
         //URL address
-        URL obj = new URL ("https://jsonplaceholder.typicode.com/posts/1");
-        URL list = new URL ("https://jsonplaceholder.typicode.com/posts");
+        URL obj = new URL("https://jsonplaceholder.typicode.com/posts/1");
 
         //Executor
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        HttpURLConnection conList = (HttpURLConnection) list.openConnection();
 
         //Determined what method will be used (GET, POST, PUT, or DELETE)
         con.setRequestMethod("GET");
-        conList.setRequestMethod("GET");
 
         //Determine the content type. In this case, it is a JSON variable
         con.setRequestProperty("Content-Type", "application/json");
-        conList.setRequestProperty("Content-Type", "application/json");
-        //listSize = conList.getContentLength();
 
         //Make request and receive a response
         responseCode = con.getResponseCode();
@@ -72,9 +132,9 @@ public class RequestOperator extends Thread {
 
         //If response okay, using InputStream
         //If not, using error stream
-        if(responseCode==200){
+        if (responseCode == 200) {
             streamReader = new InputStreamReader(con.getInputStream());
-        }else {
+        } else {
             streamReader = new InputStreamReader(con.getErrorStream());
         }
 
@@ -82,7 +142,7 @@ public class RequestOperator extends Thread {
         String inputLine;
         StringBuffer response = new StringBuffer();
 
-        while ((inputLine = in.readLine()) != null){
+        while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
         in.close();
@@ -90,10 +150,9 @@ public class RequestOperator extends Thread {
         //print Result
         System.out.println(response.toString());
 
-        if (responseCode==200){
+        if (responseCode == 200) {
             return parsingJsonObject(response.toString());
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -116,17 +175,17 @@ public class RequestOperator extends Thread {
         return post;
     }
 
-    private void failed (int code){
-        if (listener != null){
+    private void failed(int code) {
+        if (listener != null) {
             listener.failed(code);
         }
     }
 
-    private void success(ModelPost publication){
-        if (listener!=null){
+    private void success(ModelPost publication) {
+        if (listener != null) {
             listener.success(publication);
         }
     }
-
-
 }
+
+

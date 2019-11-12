@@ -8,7 +8,7 @@
     tools:context=".HomeActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/dollarSign"
         android:layout_width="360dp"
         android:layout_height="588dp"
         app:layout_constraintBottom_toBottomOf="parent"

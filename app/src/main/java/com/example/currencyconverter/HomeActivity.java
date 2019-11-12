@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +24,17 @@ public class HomeActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        YoYo.with(Techniques.Shake)
+                .duration(3500)
+                .repeat(2)
+                .playOn(findViewById(R.id.dollarSign));
+
         Thread myThread = new Thread(){
             @Override
             public void run(){
                 try {
-                    sleep(2500);
+
+                    sleep(3500);
                     Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();

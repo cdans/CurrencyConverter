@@ -3,6 +3,8 @@ package com.example.currencyconverter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
     public static ProgressBar progressBar;
 
-    TextView numberItemsJSON;
+    public static TextView tfPosts;
 
     TextView title;
     TextView bodyText;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        numberItemsJSON = (TextView) findViewById(R.id.numberItemsJSON);
+        tfPosts = (TextView) findViewById(R.id.numberItemsJSON);
         title = (TextView) findViewById(R.id.title);
         bodyText = (TextView) findViewById(R.id.body_text);
 
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
             }
         });
 
+
+
         buttonCurrencyTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +88,12 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
         });
     }
 
+
+    @Override
+    public void addPostsNumber(int countPosts) {
+        tfPosts.setText(countPosts + " posts");
+    }
+
     View.OnClickListener requestButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -94,14 +104,14 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     private void sendRequest(){
         setIndicatorStatus(IndicatingView.SUCCESS);
 
+        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alphaview);
+        indicator.startAnimation(animation1);
+
         progressBar.setVisibility(View.VISIBLE);
 
         RequestOperator ro = new RequestOperator();
         ro.setListener(this);
         ro.start();
-
-        String strListSize = Integer.toString(RequestOperator.listSize);
-        numberItemsJSON.setText(strListSize);
     }
 
     public void updatePublication(){
@@ -115,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
                     title.setText("FAILED");
                     bodyText.setText("");
                 }
+
+                indicator.clearAnimation();
             }
         });
     }
