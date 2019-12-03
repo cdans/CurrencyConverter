@@ -15,7 +15,10 @@ public class RequestOperator extends Thread {
         void success(ModelPost publication);
 
         void failed(int responseCode);
+
         void addPostsNumber(int countPosts);
+
+        void setCurrencyText(String currencyText);
     }
 
     private RequestOperatorListener listener;
@@ -25,6 +28,14 @@ public class RequestOperator extends Thread {
         this.listener = listener;
     }
 
+  /* public interface CurrencyUnit {
+        String getCurrencyCode();
+        int getNumericCode();
+        int getDefaultFractionDigits ();
+        CurrencyContext getContext (); // new
+    }*/
+
+
     @Override
     public void run() {
         super.run();
@@ -32,9 +43,11 @@ public class RequestOperator extends Thread {
             sleep(2000);
             ModelPost publication = request();
             String jsnString = request2();
+            request3();
             if (publication != null) {
                 success(publication);
                 addPostsNumber(this.countPosts(jsnString));
+
             } else {
                 failed(responseCode);
             }
@@ -47,68 +60,117 @@ public class RequestOperator extends Thread {
         }
     }
 
-     private void addPostsNumber(int countPosts) {
-         if (listener!=null){
-             listener.addPostsNumber(countPosts);
-         }
-     }
 
-     private int countPosts(String jsnString) {
-         int counter = 0;
-         char c;
-         for(int i = 0; i < jsnString.length(); i++) {
-             c = jsnString.charAt(i);
-             if(c == '{') counter++;
-         }
-         return counter;
-     }
+    private void addPostsNumber(int countPosts) {
+        if (listener != null) {
+            listener.addPostsNumber(countPosts);
+        }
+    }
 
-     private String request2() throws IOException, JSONException {
-         //URL address
-         URL obj = new URL ("https://jsonplaceholder.typicode.com/posts");
+    private int countPosts(String jsnString) {
+        int counter = 0;
+        char c;
+        for (int i = 0; i < jsnString.length(); i++) {
+            c = jsnString.charAt(i);
+            if (c == '{') counter++;
+        }
+        return counter;
+    }
 
-         //Executor
-         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-         //Determined what method will be used (GET, POST, PUT, or DELETE)
-         con.setRequestMethod("GET");
+    private String request2() throws IOException, JSONException {
+        //URL address
+        URL obj = new URL("https://jsonplaceholder.typicode.com/posts");
 
-         //Determine the content type. In this case, it is a JSON variable
-         con.setRequestProperty("Content-Type", "application/json");
+        //Executor
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-         //Make request and receive a response
-         responseCode = con.getResponseCode();
-         System.out.println("Response Code: " + responseCode);
+        //Determined what method will be used (GET, POST, PUT, or DELETE)
+        con.setRequestMethod("GET");
 
-         InputStreamReader streamReader;
+        //Determine the content type. In this case, it is a JSON variable
+        con.setRequestProperty("Content-Type", "application/json");
 
-         //If response okay, using InputStream
-         //If not, using error stream
-         if(responseCode==200){
-             streamReader = new InputStreamReader(con.getInputStream());
-         }else {
-             streamReader = new InputStreamReader(con.getErrorStream());
-         }
+        //Make request and receive a response
+        responseCode = con.getResponseCode();
+        System.out.println("Response Code: " + responseCode);
 
-         BufferedReader in = new BufferedReader(streamReader);
-         String inputLine;
-         StringBuffer response = new StringBuffer();
+        InputStreamReader streamReader;
 
-         while ((inputLine = in.readLine()) != null){
-             response.append(inputLine);
-         }
-         in.close();
+        //If response okay, using InputStream
+        //If not, using error stream
+        if (responseCode == 200) {
+            streamReader = new InputStreamReader(con.getInputStream());
+        } else {
+            streamReader = new InputStreamReader(con.getErrorStream());
+        }
 
-         //print Result
-         System.out.println(response.toString());
+        BufferedReader in = new BufferedReader(streamReader);
+        String inputLine;
+        StringBuffer response = new StringBuffer();
 
-         if (responseCode==200){
-             return response.toString();
-         }
-         else{
-             return null;
-         }
-     }
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        //print Result
+        System.out.println(response.toString());
+
+        if (responseCode == 200) {
+            return response.toString();
+        } else {
+            return null;
+        }
+    }
+
+    private int request3() throws IOException, JSONException {
+        //URL address
+        URL obj = new URL("https://api.openrates.io/latest");
+
+        //Executor
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        //Determined what method will be used (GET, POST, PUT, or DELETE)
+        con.setRequestMethod("GET");
+
+        //Determine the content type. In this case, it is a JSON variable
+        con.setRequestProperty("Content-Type", "application/json");
+
+        //Make request and receive a response
+        responseCode = con.getResponseCode();
+        System.out.println("Response Code: " + responseCode);
+
+        InputStreamReader streamReader;
+
+        //If response okay, using InputStream
+        //If not, using error stream
+        if (responseCode == 200) {
+            streamReader = new InputStreamReader(con.getInputStream());
+        } else {
+            streamReader = new InputStreamReader(con.getErrorStream());
+        }
+
+        BufferedReader in = new BufferedReader(streamReader);
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        //print Result
+        System.out.println(response.toString());
+
+        if (responseCode == 200) {
+            parsingJsonCurrencies(response.toString());
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
 
     private ModelPost request() throws IOException, JSONException {
 
@@ -151,16 +213,33 @@ public class RequestOperator extends Thread {
         System.out.println(response.toString());
 
         if (responseCode == 200) {
-            return parsingJsonObject(response.toString());
+            return parsingJsonPost(response.toString());
         } else {
             return null;
         }
     }
 
-    public ModelPost parsingJsonObject(String response) throws JSONException {
+    public void parsingJsonCurrencies(String response) throws JSONException {
 
         //attempts to create a json object of achieving
         JSONObject object = new JSONObject(response);
+        JSONObject rates =  object.getJSONObject("rates");
+        Double eur = rates.getDouble("EUR");
+        Double usd = rates.getDouble("USD");
+        Double gbp = rates.getDouble("GBP");
+        Double jpy = rates.getDouble("JPY");
+        Double aud = rates.getDouble("AUD");
+        Double cad = rates.getDouble("CAD");
+
+
+        setCurrencyText("USD " + usd);
+    }
+
+    public ModelPost parsingJsonPost(String response) throws JSONException {
+
+        //attempts to create a json object of achieving
+        JSONObject object = new JSONObject(response);
+
         ModelPost post = new ModelPost();
 
         //because we will not need ID and User ID, they do not necessarily
@@ -186,6 +265,13 @@ public class RequestOperator extends Thread {
             listener.success(publication);
         }
     }
+
+    private void setCurrencyText(String currencyText) {
+        if (listener != null) {
+            listener.setCurrencyText(currencyText);
+        }
+    }
 }
+
 
 

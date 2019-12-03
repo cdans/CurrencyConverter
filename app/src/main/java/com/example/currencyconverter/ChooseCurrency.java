@@ -43,11 +43,11 @@ public class ChooseCurrency extends AppCompatActivity {
 
                 int index = items.get(position).getImageId();
                 if (button.equals("buttonCurrencyOne")) {
-
+                    MainActivity.currencyOne = items.get(position);
                     MainActivity.buttonCurrencyOne.setText(items.get(position).getTitle());
                 }
                 else{
-
+                    MainActivity.currencyTwo = items.get(position);
                     MainActivity.buttonCurrencyTwo.setText(items.get(position).getTitle());
 
                 }

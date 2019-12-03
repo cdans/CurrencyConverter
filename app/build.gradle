@@ -32,4 +32,9 @@ dependencies {
 
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
+
+    implementation 'org.json:json:20190722'
+
+    //https://mvnrepository.com/artifact/javax.money/money-api
+    implementation group: 'javax.money', name: 'money-api', version: '1.0'
 }

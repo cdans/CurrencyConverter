@@ -61,7 +61,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
                 }
                 else{
 
-                    HomeActivity.items.add(new ListItem(strname, R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
+                    HomeActivity.items.add(new ListItem(null, strname, 5., R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
 
                     Intent intent = new Intent(AddCurrencyActivity.this, SecondActivity.class);
 

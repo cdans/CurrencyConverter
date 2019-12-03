@@ -19,8 +19,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        items.add(new ListItem("Euro", R.drawable.euro, null));
-        items.add(new ListItem("US Dollar", R.drawable.dollar, null));
+        items.add(new ListItem("EUR", "Euro", 1., R.drawable.eur, null));
+        items.add(new ListItem("USD", "US dollar", 1.1071, R.drawable.us, null));
+        items.add(new ListItem("JPY", "Japanese yen", 120.39, R.drawable.jp, null));
+        items.add(new ListItem("GBP", "Pound sterling", 0.852,R.drawable.gb, null));
+        items.add(new ListItem("AUD", "Australian dollar", 1.6186,R.drawable.au, null));
+        items.add(new ListItem("CAD", "Canadian dollar",1.4747 ,R.drawable.ca, null));
+
 
         getSupportActionBar().hide();
 

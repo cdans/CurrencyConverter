@@ -8,14 +8,18 @@ public class ListItem  implements Parcelable {
     private String title;
     private int imageId;
     private String description;
+    private String code;
+    private Double rate;
 
     public ListItem (){
     }
 
-    public ListItem(String title, int imageId, String description){
+    public ListItem(String code, String title, Double rate, int imageId, String description){
         this.title = title;
         this.imageId = imageId;
         this.description = description;
+        this.code = code;
+        this.rate = rate;
     }
 
     protected ListItem(Parcel in) {
@@ -58,6 +62,22 @@ public class ListItem  implements Parcelable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
     }
 
     @Override
