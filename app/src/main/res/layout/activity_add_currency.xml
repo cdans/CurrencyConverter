@@ -32,44 +32,41 @@
         android:textColor="#F9F9F9" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textViewCurrencyName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
+            android:layout_margin="5dp"
             android:text="One unit of your currency are"
             android:textSize="18sp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editComparison"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:hint="How much?"
-            android:inputType="numberDecimal"
-            android:numeric="decimal" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textCompareCurrency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:textSize="18sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editComparison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:hint="How much?"
+                android:inputType="numberDecimal"
+                android:numeric="decimal" />
+
+            <TextView
+                android:id="@+id/textCompareCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textSize="18sp" />
+        </LinearLayout>
 
     </LinearLayout>
 

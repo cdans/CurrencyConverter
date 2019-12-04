@@ -61,8 +61,10 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                items.remove(position);
-                myListView.setAdapter(adapter);
+                if(items.get(position).getCode()==null){
+                    items.remove(position);
+                    myListView.setAdapter(adapter);
+                }
                 return true;
             }
         });

@@ -17,8 +17,6 @@ public class RequestOperator extends Thread {
         void failed(int responseCode);
 
         void addPostsNumber(int countPosts);
-
-        void setCurrencyText(String currencyText);
     }
 
     private RequestOperatorListener listener;
@@ -124,7 +122,7 @@ public class RequestOperator extends Thread {
         }
     }
 
-    private int request3() throws IOException, JSONException {
+    private void request3() throws IOException, JSONException {
         //URL address
         URL obj = new URL("https://api.openrates.io/latest");
 
@@ -165,9 +163,6 @@ public class RequestOperator extends Thread {
 
         if (responseCode == 200) {
             parsingJsonCurrencies(response.toString());
-            return 1;
-        } else {
-            return -1;
         }
     }
 
@@ -224,15 +219,16 @@ public class RequestOperator extends Thread {
         //attempts to create a json object of achieving
         JSONObject object = new JSONObject(response);
         JSONObject rates =  object.getJSONObject("rates");
-        Double eur = rates.getDouble("EUR");
-        Double usd = rates.getDouble("USD");
-        Double gbp = rates.getDouble("GBP");
-        Double jpy = rates.getDouble("JPY");
-        Double aud = rates.getDouble("AUD");
-        Double cad = rates.getDouble("CAD");
 
+        for (int i = 1; i<HomeActivity.items.size(); i++) {
+            String code = HomeActivity.items.get(i).getCode();
+            if (code != null){
+                Double rate = rates.getDouble(code);
+                HomeActivity.items.get(i).setRate(rate);
+            }
 
-        setCurrencyText("USD " + usd);
+            System.out.println(i);
+        }
     }
 
     public ModelPost parsingJsonPost(String response) throws JSONException {
@@ -263,12 +259,6 @@ public class RequestOperator extends Thread {
     private void success(ModelPost publication) {
         if (listener != null) {
             listener.success(publication);
-        }
-    }
-
-    private void setCurrencyText(String currencyText) {
-        if (listener != null) {
-            listener.setCurrencyText(currencyText);
         }
     }
 }

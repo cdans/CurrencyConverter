@@ -25,8 +25,10 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     public static ListItem currencyOne = HomeActivity.items.get(0);
     public static ListItem currencyTwo = HomeActivity.items.get(1);
 
-    EditText valueCurrencyOne;
-    EditText valueCurrencyTwo;
+    public static EditText valueCurrencyOne;
+    public static EditText valueCurrencyTwo;
+
+    public static TextView currencyText;
 
     private IndicatingView indicator;
 
@@ -55,7 +57,14 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
         buttonCurrencyTwo = (Button) findViewById(R.id.buttonCurrencyTwo);
 
         valueCurrencyOne = (EditText) findViewById(R.id.valueCurrencyOne);
+        valueCurrencyOne.setText("1");
         valueCurrencyTwo = (EditText) findViewById(R.id.valueCurrencyTwo);
+        Double rateUSD = Math.round(100.0 * HomeActivity.items.get(1).getRate()) / 100.0;
+        valueCurrencyTwo.setText(rateUSD.toString());
+
+        currencyText = (TextView) findViewById(R.id.currencyText);
+        currencyText.setText("1 Euro equals " + rateUSD.toString() + " US dollar");
+
 
         indicator = (IndicatingView) findViewById(R.id.generated_graphic);
 
@@ -122,12 +131,15 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(valueCurrencyOne.hasFocus()){
+                int lengthValueCurrencyOne = valueCurrencyOne.getText().toString().trim().length();
+                if(valueCurrencyOne.hasFocus() && lengthValueCurrencyOne != 0){
                         Double conversion = currencyConversion(Double.parseDouble(s.toString()), currencyOne, currencyTwo);
                         valueCurrencyTwo.setText(conversion.toString());
                     }
-
+                else if (valueCurrencyOne.hasFocus() && lengthValueCurrencyOne == 0){
+                    valueCurrencyTwo.setText("");
                 }
+            }
         });
 
         valueCurrencyTwo.addTextChangedListener(new TextWatcher() {
@@ -141,32 +153,35 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(valueCurrencyTwo.hasFocus()){
+                int lengthValueCurrencyTwo = valueCurrencyTwo.getText().toString().trim().length();
+                if(valueCurrencyTwo.hasFocus() && lengthValueCurrencyTwo != 0){
                         Double conversion = currencyConversion(Double.parseDouble(s.toString()), currencyTwo, currencyOne);
                         valueCurrencyOne.setText(conversion.toString());
+                }
+                else if (valueCurrencyTwo.hasFocus() && lengthValueCurrencyTwo == 0){
+                    valueCurrencyOne.setText("");
                 }
             }
         });
     }
 
 
-    public double currencyConversion (Double amount, ListItem currencyOne, ListItem currencyTwo){
+    public static Double currencyConversion (Double amount, ListItem currencyOne, ListItem currencyTwo){
 
         Double converted;
 
         if (currencyOne.getCode()=="EUR"){
             converted = amount*currencyTwo.getRate();
-            return converted;
         }
         else if (currencyTwo.getCode()=="EUR"){
             converted = amount/currencyOne.getRate();
-            return converted;
         }
         else {
             converted = amount/currencyOne.getRate();
             converted = converted*currencyTwo.getRate();
-            return converted;
         }
+        converted = Math.round(100.0 * converted) / 100.0;
+        return converted;
     }
 
 
@@ -175,18 +190,6 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     public void addPostsNumber(int countPosts) {
         tfPosts.setText(countPosts + " posts");
 
-    }
-
-    @Override
-    public void setCurrencyText(final String currencyText) {
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                valueCurrencyOne.setText(currencyText);
-                valueCurrencyTwo.setText("hell!!!");
-            }
-        });
     }
 
     View.OnClickListener requestButtonClicked = new View.OnClickListener() {

@@ -49,8 +49,21 @@ public class ChooseCurrency extends AppCompatActivity {
                 else{
                     MainActivity.currencyTwo = items.get(position);
                     MainActivity.buttonCurrencyTwo.setText(items.get(position).getTitle());
-
                 }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.valueCurrencyOne.setText("1");
+
+                        Double converted = MainActivity.currencyConversion(1., MainActivity.currencyOne, MainActivity.currencyTwo);
+                        MainActivity.valueCurrencyTwo.setText(converted.toString());
+
+                        MainActivity.currencyText.setText("1 "+  MainActivity.currencyOne.getTitle() + " equals " +
+                                converted.toString() + " " + MainActivity.currencyTwo.getTitle());
+                    }
+                });
+
                 //MainActivity.buttonCurrencyOne.drawable
                 finish();
                 //startActivity(intent);
