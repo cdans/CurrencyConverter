@@ -21,6 +21,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
 
     public static TextView textCompareCurrency;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,9 @@ public class AddCurrencyActivity extends AppCompatActivity {
                 }
                 else{
 
-                    HomeActivity.currencies.add(new Currency(null, strname, Double.parseDouble(strUnit), R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
+                    //HomeActivity.currencies.add(new Currency(null, strname, Double.parseDouble(strUnit), R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
+
+                    HomeActivity.mDb.currencyDao().insert(new Currency(null, strname, Double.parseDouble(strUnit), R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
 
                     Intent intent = new Intent(AddCurrencyActivity.this, SecondActivity.class);
 

@@ -16,7 +16,7 @@ public class SetCompareCurrency extends AppCompatActivity {
     public static ListView myListView;
     public static ListAdapter adapter;
     private SearchView searchView;
-    public List<Currency> items = HomeActivity.currencies;
+    List<Currency> currencies = HomeActivity.createListC();
 
     public static final String EXTRA_BUTTON = "EXTRA_BUTTON";
 
@@ -34,15 +34,15 @@ public class SetCompareCurrency extends AppCompatActivity {
         searchView = (SearchView) findViewById(R.id.searchViewCurrencies);
 
 
-        adapter = new ListAdapter(this, items);
+        adapter = new ListAdapter(this, currencies);
         myListView.setAdapter(adapter);
 
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    AddCurrencyActivity.textCompareCurrency.setText(items.get(position).getTitle());
-                    AddCurrencyActivity.setCompareCurrencyButton.setText(items.get(position).getTitle());
+                    AddCurrencyActivity.textCompareCurrency.setText(currencies.get(position).getTitle());
+                    AddCurrencyActivity.setCompareCurrencyButton.setText(currencies.get(position).getTitle());
 
                 //AddCurrencyActivity.setCompareCurrencyButton.drawable
                 finish();

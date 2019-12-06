@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements RequestOperator.RequestOperatorListener {
 
@@ -22,11 +24,19 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     public static Button buttonCurrencyOne;
     public static Button buttonCurrencyTwo;
 
-    public static Currency currencyOne = HomeActivity.currencies.get(0);
-    public static Currency currencyTwo = HomeActivity.currencies.get(1);
+    public static List<Currency> currencies = HomeActivity.createListC();
+
+    public static Currency eur = HomeActivity.getCurrencyByCode("EUR", currencies);
+    public static int posEur = currencies.indexOf(eur);
+    public static Currency currencyOne = currencies.get(posEur);
+
+    public static Currency usd = HomeActivity.getCurrencyByCode("USD", currencies);
+    public static int posUsd = currencies.indexOf(usd);
+    public static Currency currencyTwo = currencies.get(posUsd);
 
     public static EditText valueCurrencyOne;
     public static EditText valueCurrencyTwo;
+
 
     public static TextView currencyText;
 
@@ -59,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
         valueCurrencyOne = (EditText) findViewById(R.id.valueCurrencyOne);
         valueCurrencyOne.setText("1");
         valueCurrencyTwo = (EditText) findViewById(R.id.valueCurrencyTwo);
-        Double rateUSD = Math.round(100.0 * HomeActivity.currencies.get(1).getRate()) / 100.0;
+        Double rateUSD = Math.round(100.0 * currencies.get(posUsd).getRate()) / 100.0;
         valueCurrencyTwo.setText(rateUSD.toString());
 
         currencyText = (TextView) findViewById(R.id.currencyText);
@@ -102,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
         });
 
 
-        buttonCurrencyTwo.setOnClickListener(new View.OnClickListener() {
+       buttonCurrencyTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -170,10 +180,10 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
         Double converted;
 
-        if (currencyOne.getCode()=="EUR"){
+        if (currencyOne.getCode().equals("EUR")){
             converted = amount*currencyTwo.getRate();
         }
-        else if (currencyTwo.getCode()=="EUR"){
+        else if (currencyTwo.getCode().equals("EUR")){
             converted = amount/currencyOne.getRate();
         }
         else {

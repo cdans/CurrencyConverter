@@ -16,7 +16,7 @@ public class ChooseCurrency extends AppCompatActivity {
     public static ListView myListView;
     public static ListAdapter adapter;
     private SearchView searchView;
-    public List<Currency> currencies = HomeActivity.currencies;
+    List<Currency> currencies = HomeActivity.createListC();
 
     public static final String EXTRA_BUTTON = "EXTRA_BUTTON";
 
@@ -63,7 +63,6 @@ public class ChooseCurrency extends AppCompatActivity {
                                 converted.toString() + " " + MainActivity.currencyTwo.getTitle());
                     }
                 });
-
                 //MainActivity.buttonCurrencyOne.drawable
                 finish();
                 //startActivity(intent);
@@ -73,3 +72,6 @@ public class ChooseCurrency extends AppCompatActivity {
 
             }
         }
+
+
+

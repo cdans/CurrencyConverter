@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 public class RequestOperator extends Thread {
 
@@ -220,11 +221,16 @@ public class RequestOperator extends Thread {
         JSONObject object = new JSONObject(response);
         JSONObject rates =  object.getJSONObject("rates");
 
-        for (int i = 1; i<HomeActivity.currencies.size(); i++) {
-            String code = HomeActivity.currencies.get(i).getCode();
+        List<Currency> currencies = HomeActivity.createListC();
+        
+        for (int i = 1; i < currencies.size(); i++) {
+            String code = currencies.get(i).getCode();
             if (code != null){
                 Double rate = rates.getDouble(code);
-                HomeActivity.currencies.get(i).setRate(rate);
+                currencies.get(i).setRate(rate);
+
+                Currency updatedC = currencies.get(i);
+                HomeActivity.mDb.currencyDao().update(updatedC);
             }
 
             System.out.println(i);

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -22,11 +21,7 @@ public class SecondActivity extends AppCompatActivity {
     public static ListView myListView;
     public static ListAdapter adapter;
     private ImageButton addButton;
-    private Button listTransferButton;
     private SearchView searchView;
-
-
-    public List<Currency> items = HomeActivity.currencies;
 
 
     @Override
@@ -39,8 +34,9 @@ public class SecondActivity extends AppCompatActivity {
         addButton = (ImageButton) findViewById(R.id.addButton);
         searchView = (SearchView) findViewById(R.id.searchViewCurrencies);
 
+        final List<Currency> currencies = HomeActivity.createListC();
 
-        adapter = new ListAdapter(this, items);
+        adapter = new ListAdapter(this, currencies);
         myListView.setAdapter(adapter);
 
 
@@ -54,9 +50,9 @@ public class SecondActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getBaseContext(), DetailActivity.class);
                 //  Data transfer: image , name, description
-                intent.putExtra("EXTRA_NAME", items.get(position).getTitle());
-                intent.putExtra("EXTRA_DESCRIPTION", items.get(position).getDescription());
-                intent.putExtra("EXTRA_IMAGE_ID", items.get(position).getImageId());
+                intent.putExtra("EXTRA_NAME", currencies.get(position).getTitle());
+                intent.putExtra("EXTRA_DESCRIPTION", currencies.get(position).getDescription());
+                intent.putExtra("EXTRA_IMAGE_ID", currencies.get(position).getImageId());
                 startActivity(intent);
             }
         });
@@ -69,8 +65,17 @@ public class SecondActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                items.remove(position);
-                myListView.setAdapter(adapter);
+                if (currencies.get(position).getCode()==null){
+                    Currency currency = currencies.get(position);
+                    mDb.currencyDao().delete(currency);
+
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+
+                   // myListView.setAdapter(adapter);
+                }
+
                 return true;
             }
         });
