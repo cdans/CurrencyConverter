@@ -222,7 +222,7 @@ public class RequestOperator extends Thread {
         JSONObject rates =  object.getJSONObject("rates");
 
         List<Currency> currencies = HomeActivity.createListC();
-        
+
         for (int i = 1; i < currencies.size(); i++) {
             String code = currencies.get(i).getCode();
             if (code != null){
@@ -255,6 +255,7 @@ public class RequestOperator extends Thread {
 
         return post;
     }
+
 
     private void failed(int code) {
         if (listener != null) {
