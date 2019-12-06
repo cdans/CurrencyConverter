@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class AddCurrencyActivity extends AppCompatActivity {
 
     private Button submitButton;
@@ -49,6 +51,8 @@ public class AddCurrencyActivity extends AppCompatActivity {
             }
         });
 
+        final List<Currency> currencies = HomeActivity.createListC();
+
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             @SuppressLint("ShowToast")
@@ -64,10 +68,23 @@ public class AddCurrencyActivity extends AppCompatActivity {
                     Toast.makeText(AddCurrencyActivity.this, "Please edit everything before submitting.", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    Double rate = Double.parseDouble(strUnit);
 
-                    //HomeActivity.currencies.add(new Currency(null, strname, Double.parseDouble(strUnit), R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
+                    if (setCompareCurrencyButton.getText().toString().equals("Euro")){
+                        rate = 1/rate;
+                        rate =  Math.round(10000.0 * rate) / 10000.0;
+                    }
+                    else {
+                        Currency c1 = SetCompareCurrency.currency;
+                        Currency c2 = HomeActivity.getCurrencyByCode("EUR", currencies);
+                        rate = MainActivity.currencyConversion(rate, c1, c2);
 
-                    HomeActivity.mDb.currencyDao().insert(new Currency(null, strname, Double.parseDouble(strUnit), R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
+                        rate = 1/rate;
+
+                        rate =  Math.round(10000.0 * rate) / 10000.0;
+                    }
+
+                    HomeActivity.mDb.currencyDao().insert(new Currency(null, strname, rate, R.drawable.comingsoon,  "One unit of " + strname + " are " + strUnit + " " + SetCompareCurrency.currency.getTitle() + " " + rate));
 
                     Intent intent = new Intent(AddCurrencyActivity.this, SecondActivity.class);
 

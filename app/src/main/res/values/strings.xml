@@ -7,7 +7,7 @@
     <string name="listview">List View</string>
     <string name="description">Description</string>
     <string name="title">Title</string>
-    <string name="send_request">Send Request</string>
+    <string name="send_request">Update rates</string>
     <string name="addButton">+</string>
     <string name="listTransferButton">List Transfer</string>
     <string name="title_activity_main2">Main2Activity</string>
