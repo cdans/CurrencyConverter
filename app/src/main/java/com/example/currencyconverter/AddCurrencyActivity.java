@@ -25,7 +25,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);
 
         setContentView(R.layout.activity_add_currency);
 
@@ -64,7 +64,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
                 }
                 else{
 
-                    HomeActivity.items.add(new ListItem(null, strname, Double.parseDouble(strUnit), R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
+                    HomeActivity.currencies.add(new Currency(null, strname, Double.parseDouble(strUnit), R.drawable.comingsoon,  "One unit of this currency are " + strUnit + " " + setCompareCurrencyButton.getText()));
 
                     Intent intent = new Intent(AddCurrencyActivity.this, SecondActivity.class);
 

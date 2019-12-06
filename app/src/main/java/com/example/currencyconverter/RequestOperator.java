@@ -220,11 +220,11 @@ public class RequestOperator extends Thread {
         JSONObject object = new JSONObject(response);
         JSONObject rates =  object.getJSONObject("rates");
 
-        for (int i = 1; i<HomeActivity.items.size(); i++) {
-            String code = HomeActivity.items.get(i).getCode();
+        for (int i = 1; i<HomeActivity.currencies.size(); i++) {
+            String code = HomeActivity.currencies.get(i).getCode();
             if (code != null){
                 Double rate = rates.getDouble(code);
-                HomeActivity.items.get(i).setRate(rate);
+                HomeActivity.currencies.get(i).setRate(rate);
             }
 
             System.out.println(i);

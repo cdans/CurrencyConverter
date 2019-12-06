@@ -16,7 +16,7 @@ public class ChooseCurrency extends AppCompatActivity {
     public static ListView myListView;
     public static ListAdapter adapter;
     private SearchView searchView;
-    public List<ListItem> items = HomeActivity.items;
+    public List<Currency> currencies = HomeActivity.currencies;
 
     public static final String EXTRA_BUTTON = "EXTRA_BUTTON";
 
@@ -34,21 +34,21 @@ public class ChooseCurrency extends AppCompatActivity {
         searchView = (SearchView) findViewById(R.id.searchViewCurrencies);
 
 
-        adapter = new ListAdapter(this, items);
+        adapter = new ListAdapter(this, currencies);
         myListView.setAdapter(adapter);
 
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int index = items.get(position).getImageId();
+                int index = currencies.get(position).getImageId();
                 if (button.equals("buttonCurrencyOne")) {
-                    MainActivity.currencyOne = items.get(position);
-                    MainActivity.buttonCurrencyOne.setText(items.get(position).getTitle());
+                    MainActivity.currencyOne = currencies.get(position);
+                    MainActivity.buttonCurrencyOne.setText(currencies.get(position).getTitle());
                 }
                 else{
-                    MainActivity.currencyTwo = items.get(position);
-                    MainActivity.buttonCurrencyTwo.setText(items.get(position).getTitle());
+                    MainActivity.currencyTwo = currencies.get(position);
+                    MainActivity.buttonCurrencyTwo.setText(currencies.get(position).getTitle());
                 }
 
                 runOnUiThread(new Runnable() {

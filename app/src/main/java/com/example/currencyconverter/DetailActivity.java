@@ -15,7 +15,6 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_NAME = "EXTRA_NAME";
     public static final String EXTRA_DESCRIPTION = "EXTRA_DESCRIPTION";
 
-
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

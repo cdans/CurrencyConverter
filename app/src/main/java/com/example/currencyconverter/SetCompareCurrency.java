@@ -16,7 +16,7 @@ public class SetCompareCurrency extends AppCompatActivity {
     public static ListView myListView;
     public static ListAdapter adapter;
     private SearchView searchView;
-    public List<ListItem> items = HomeActivity.items;
+    public List<Currency> items = HomeActivity.currencies;
 
     public static final String EXTRA_BUTTON = "EXTRA_BUTTON";
 

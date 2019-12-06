@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     public static Button buttonCurrencyOne;
     public static Button buttonCurrencyTwo;
 
-    public static ListItem currencyOne = HomeActivity.items.get(0);
-    public static ListItem currencyTwo = HomeActivity.items.get(1);
+    public static Currency currencyOne = HomeActivity.currencies.get(0);
+    public static Currency currencyTwo = HomeActivity.currencies.get(1);
 
     public static EditText valueCurrencyOne;
     public static EditText valueCurrencyTwo;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
         valueCurrencyOne = (EditText) findViewById(R.id.valueCurrencyOne);
         valueCurrencyOne.setText("1");
         valueCurrencyTwo = (EditText) findViewById(R.id.valueCurrencyTwo);
-        Double rateUSD = Math.round(100.0 * HomeActivity.items.get(1).getRate()) / 100.0;
+        Double rateUSD = Math.round(100.0 * HomeActivity.currencies.get(1).getRate()) / 100.0;
         valueCurrencyTwo.setText(rateUSD.toString());
 
         currencyText = (TextView) findViewById(R.id.currencyText);
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     }
 
 
-    public static Double currencyConversion (Double amount, ListItem currencyOne, ListItem currencyTwo){
+    public static Double currencyConversion (Double amount, Currency currencyOne, Currency currencyTwo){
 
         Double converted;
 

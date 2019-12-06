@@ -12,19 +12,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    public static List<ListItem> items = new ArrayList<>();
+
+    public static List<Currency> currencies = new ArrayList<>();
+
+    public static CurrencyDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        items.add(new ListItem("EUR", "Euro", 1., R.drawable.eur, "The Euro is the base currency."));
-        items.add(new ListItem("USD", "US dollar", 1.1071, R.drawable.us, "1.1071 US dollar are 1 Euro."));
-        items.add(new ListItem("JPY", "Japanese yen", 120.39, R.drawable.jp, "120.39 Japanese yen are 1 Euro."));
-        items.add(new ListItem("GBP", "Pound sterling", 0.852,R.drawable.gb, "0.852 Pound sterling are 1 Euro."));
-        items.add(new ListItem("AUD", "Australian dollar", 1.6186,R.drawable.au, "1.6186 Australian dollar are 1 Euro."));
-        items.add(new ListItem("CAD", "Canadian dollar",1.4747 ,R.drawable.ca, "1.4747 Canadian dollar are 1 Euro."));
+        mDb = AppActivity.getDatabase();
+
+        List<Currency> currencies2 = mDb.currencyDao().getAllCurrencies();
+
+        currencies.add(new Currency("EUR", "Euro", 1., R.drawable.eur, "The Euro is the base currency."));
+        currencies.add(new Currency("USD", "US dollar", 1.1071, R.drawable.us, "1.1071 US dollar are 1 Euro."));
+        currencies.add(new Currency("JPY", "Japanese yen", 120.39, R.drawable.jp, "120.39 Japanese yen are 1 Euro."));
+        currencies.add(new Currency("GBP", "Pound sterling", 0.852,R.drawable.gb, "0.852 Pound sterling are 1 Euro."));
+        currencies.add(new Currency("AUD", "Australian dollar", 1.6186,R.drawable.au, "1.6186 Australian dollar are 1 Euro."));
+        currencies.add(new Currency("CAD", "Canadian dollar",1.4747 ,R.drawable.ca, "1.4747 Canadian dollar are 1 Euro."));
 
         getSupportActionBar().hide();
 

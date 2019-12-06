@@ -11,8 +11,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ListAdapter extends ArrayAdapter<ListItem> {
-    public ListAdapter(Context context, List<ListItem> objects){
+public class ListAdapter extends ArrayAdapter<Currency> {
+
+    public ListAdapter(Context context, List<Currency> objects){
         super(context, R.layout.listitemdesign, objects);
     }
 
@@ -30,7 +31,7 @@ public class ListAdapter extends ArrayAdapter<ListItem> {
         TextView description = (TextView) v.findViewById(R.id.description);
         ImageView image = (ImageView) v.findViewById(R.id.image);
         
-        ListItem item = getItem(position);
+        Currency item = getItem(position);
         
         title.setText(item.getTitle());
         description.setText(item.getDescription());
