@@ -14,9 +14,15 @@
         android:usesCleartextTraffic="true">
 
         <activity
+            android:name=".Compass"
+            android:parentActivityName=".Lab3">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Lab3" />
+        </activity>
+        <activity
             android:name=".Lab3"
             android:parentActivityName=".MainActivity">
-            android:screenOrientation="portrait"
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -25,9 +31,9 @@
             android:name=".MainActivity"
             android:launchMode="singleTop" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".HomeActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 

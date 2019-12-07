@@ -18,7 +18,7 @@
     <string name="no_sensor">No Sensor</string>
     <string name="stop">Stop</string>
     <string name="orientation">Orientation</string>
-
+    <string name="compass">Compass</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.example.currencyconverter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,6 +21,7 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener {
     private Sensor senAccelerometer;
 
     private Button startAndStop;
+    private Button compass;
 
     private TextView xValue;
     private TextView yValue;
@@ -39,6 +41,9 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener {
 
         startAndStop = (Button) findViewById(R.id.start_and_stop);
         startAndStop.setOnClickListener(StartAndStopButtonListener);
+
+        compass = (Button) findViewById(R.id.compass);
+        compass.setOnClickListener(CompasspButtonListener);
 
         xValue = (TextView) findViewById(R.id.x_value);
         yValue = (TextView) findViewById(R.id.y_value);
@@ -65,6 +70,16 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener {
                 startAndStop.setText(getString(R.string.stop));
                 InformationObtained = true;
             }
+        }
+    };
+
+    View.OnClickListener CompasspButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(Lab3.this, Compass.class);
+
+            startActivity(intent);
         }
     };
 

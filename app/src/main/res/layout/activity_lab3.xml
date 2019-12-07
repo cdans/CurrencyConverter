@@ -95,4 +95,13 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/compass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/button"
+        android:text="@string/compass"
+        android:textColor="#F9F9F9" />
+
 </LinearLayout>
