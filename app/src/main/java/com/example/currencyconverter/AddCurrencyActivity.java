@@ -84,7 +84,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
                         rate =  Math.round(10000.0 * rate) / 10000.0;
                     }
 
-                    HomeActivity.mDb.currencyDao().insert(new Currency(null, strname, rate, R.drawable.comingsoon,  "One unit of " + strname + " are " + strUnit + " " + SetCompareCurrency.currency.getTitle() + " " + rate));
+                    HomeActivity.mDb.currencyDao().insert(new Currency(null, strname, rate, R.drawable.comingsoon,  "One unit of " + strname + " are " + strUnit + " " + SetCompareCurrency.currency.getTitle()));
 
                     Intent intent = new Intent(AddCurrencyActivity.this, SecondActivity.class);
 

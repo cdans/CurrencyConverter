@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
     public static Button sendRequestButton;
     public static Button buttonCurrencyOne;
     public static Button buttonCurrencyTwo;
+    Button lab3;
+
 
     public static List<Currency> currencies = HomeActivity.createListC();
 
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
         setContentView(R.layout.activity_main);
 
         secondActivityButton = (Button) findViewById(R.id.secondActivityButton);
+        lab3 = (Button) findViewById(R.id.lab3);
+
 
         sendRequestButton = (Button) findViewById(R.id.send_request);
         sendRequestButton.setOnClickListener(requestButtonClicked);
@@ -74,6 +78,16 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
             public void onClick(View view) {
 
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+        lab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, Lab3.class);
 
                 startActivity(intent);
             }

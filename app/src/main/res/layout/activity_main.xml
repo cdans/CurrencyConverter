@@ -119,6 +119,16 @@
                 android:text="@string/send_request"
                 android:textColor="#F9F9F9" />
 
+            <Button
+
+                android:id="@+id/lab3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/button"
+                android:text="Lab 3"
+                android:textColor="#F9F9F9" />
+
 
             <ProgressBar
                 android:id="@+id/progressBar"

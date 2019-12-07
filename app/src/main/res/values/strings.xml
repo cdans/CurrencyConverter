@@ -11,6 +11,14 @@
     <string name="addButton">+</string>
     <string name="listTransferButton">List Transfer</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="start">start</string>
+    <string name="z">z</string>
+    <string name="y">y</string>
+    <string name="x">x</string>
+    <string name="no_sensor">No Sensor</string>
+    <string name="stop">Stop</string>
+    <string name="orientation">Orientation</string>
+
 
 
 </resources>
