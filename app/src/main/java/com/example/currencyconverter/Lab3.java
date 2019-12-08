@@ -1,11 +1,16 @@
 package com.example.currencyconverter;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +19,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-public class Lab3 extends AppCompatActivity implements SensorEventListener {
+public class Lab3 extends AppCompatActivity implements SensorEventListener, LocationListener {
 
     private SensorManager senSensorManger;
     private Sensor senAccelerometer;
+
+    LocationManager locationManager;
 
     private Button startAndStop;
     private Button compass;
@@ -28,6 +36,8 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener {
     private TextView zValue;
 
     private TextView orientation;
+    private TextView coordinates;
+
 
 
     private boolean InformationObtained;
@@ -48,15 +58,20 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener {
         xValue = (TextView) findViewById(R.id.x_value);
         yValue = (TextView) findViewById(R.id.y_value);
         zValue = (TextView) findViewById(R.id.z_value);
+
+        coordinates = (TextView) findViewById(R.id.coordinates);
         orientation = (TextView) findViewById(R.id.orientation);
 
         senSensorManger = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManger.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     View.OnClickListener StartAndStopButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             if (senAccelerometer == null) {
                 Toast.makeText(Lab3.this, getString(R.string.no_sensor), Toast.LENGTH_LONG).show();
             }
@@ -134,6 +149,14 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener {
         if (senAccelerometer != null) {
             senSensorManger.unregisterListener(Lab3.this, senAccelerometer);
         }
+
+        //
+        if (ActivityCompat.checkSelfPermission(Lab3.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        && ActivityCompat.checkSelfPermission(Lab3.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            return;
+        }
+
+        this.locationManager.removeUpdates(Lab3.this);
     }
 
     @Override
@@ -143,5 +166,41 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener {
         if (senAccelerometer != null && InformationObtained) {
             senSensorManger.registerListener(Lab3.this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         }
+
+        //
+        if (ActivityCompat.checkSelfPermission(Lab3.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(Lab3.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            return;
+        }
+
+        this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, Lab3.this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (location!=null){
+            coordinates.setText(getString(R.string.Latitude_text) + " "
+            + location.getLatitude() + " " + getString(R.string.Longitude_text) + " " + location.getLongitude());
+
+            System.out.println(location.getLatitude());
+            System.out.println(location.getLongitude());
+        }
+
+    }
+
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }
