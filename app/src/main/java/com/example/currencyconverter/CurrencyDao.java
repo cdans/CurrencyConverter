@@ -12,16 +12,19 @@ import java.util.List;
 public interface CurrencyDao {
 
     @Insert
-    void insert (Currency currency);
+    void insert(Currency currency);
 
     @Update
-    void update (Currency currency);
+    void update(Currency currency);
 
     @Delete
-    void delete (Currency currency);
+    void delete(Currency currency);
 
     @Query("SELECT * FROM currency_table ORDER BY title ASC")
     List<Currency> getAllCurrencies(); //LiveData<...>?
+
+   /*@Query("SELECT * FROM currency_table WHERE title LIKE :currencyText")
+    public List<Currency> getCurrenciesFilter (String currencyText);*/
 
 
 }

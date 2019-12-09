@@ -5,6 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -37,7 +38,7 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
                 SensorManager.SENSOR_DELAY_GAME);
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_GAME);
+                SensorManager.SENSOR_DELAY_NORMAL);
 
     }
 
@@ -52,17 +53,17 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
 
         final float alpha = 0.97f;
-        synchronized (this){
-            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-                mGravity[0] = alpha*mGravity[0]+(1-alpha)*event.values[0];
-                mGravity[1] = alpha*mGravity[1]+(1-alpha)*event.values[1];
-                mGravity[2] = alpha*mGravity[2]+(1-alpha)*event.values[2];
+        synchronized (this) {
+            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                mGravity[0] = alpha * mGravity[0] + (1 - alpha) * event.values[0];
+                mGravity[1] = alpha * mGravity[1] + (1 - alpha) * event.values[1];
+                mGravity[2] = alpha * mGravity[2] + (1 - alpha) * event.values[2];
 
             }
-            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD){
-                mGeomagnetic[0] = alpha*mGeomagnetic[0]+(1-alpha)*event.values[0];
-                mGeomagnetic[1] = alpha*mGeomagnetic[1]+(1-alpha)*event.values[1];
-                mGeomagnetic[2] = alpha*mGeomagnetic[2]+(1-alpha)*event.values[2];
+            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+                mGeomagnetic[0] = alpha * mGeomagnetic[0] + (1 - alpha) * event.values[0];
+                mGeomagnetic[1] = alpha * mGeomagnetic[1] + (1 - alpha) * event.values[1];
+                mGeomagnetic[2] = alpha * mGeomagnetic[2] + (1 - alpha) * event.values[2];
 
             }
 
@@ -70,11 +71,11 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
             float I[] = new float[9];
             boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
 
-            if (success){
-                float orientation[] = new float [3];
+            if (success) {
+                float orientation[] = new float[3];
                 SensorManager.getOrientation(R, orientation);
                 azimuth = (float) Math.toDegrees(orientation[0]);
-                azimuth = (azimuth+360)%360;
+                azimuth = (azimuth + 360) % 360;
 
                 //
                 Animation anim = new RotateAnimation(-currentAzimuth, -azimuth, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -85,8 +86,30 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
                 anim.setFillAfter(true);
 
                 compass.startAnimation(anim);
+
+                if (currentAzimuth > 359 || currentAzimuth < 1) {
+                    System.out.println("dadadadadadadadadadadadada" + currentAzimuth);
+
+
+                    finish();
+                    Thread thread2 = new Thread() {
+                        public void run() {
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                            }
+                            Looper.prepare();
+                            Lab3 photo = new Lab3();
+                            photo.takePicture();
+                        }
+                    };
+
+                    thread2.start();
+
+                }
             }
         }
+
     }
 
     @Override

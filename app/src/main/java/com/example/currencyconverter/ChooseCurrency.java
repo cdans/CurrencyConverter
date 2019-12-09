@@ -46,6 +46,7 @@ public class ChooseCurrency extends AppCompatActivity {
                 if (button.equals("buttonCurrencyOne")) {
                     MainActivity.currencyOne = currencies.get(position);
                     MainActivity.buttonCurrencyOne.setText(currencies.get(position).getTitle());
+                    MainActivity.resultTo.setText("Result to " + currencies.get(position).getTitle());
                 }
                 else{
                     MainActivity.currencyTwo = currencies.get(position);

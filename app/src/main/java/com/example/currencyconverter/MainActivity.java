@@ -43,6 +43,44 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
     public static ProgressBar progressBar;
 
+    Button oneIcon;
+    Button twoIcon;
+    Button threeIcon;
+    Button fourIcon;
+    Button fiveIcon;
+    Button sixIcon;
+    Button sevenIcon;
+    Button eightIcon;
+    Button nineIcon;
+    Button zeroIcon;
+
+    Button clearIcon;
+    Button commaIcon;
+
+    Button addIcon;
+    Button minusIcon;
+    Button divisionIcon;
+    Button multiIcon;
+
+    private final char ADDITION = '+';
+    private final char SUBTRACTION = '-';
+    private final char MULTIPLICATION = '*';
+    private final char DIVISION = '/';
+
+    private double val1 = Double.NaN;
+    private double val2;
+
+    private char ACTION;
+    private final char EQU = 0;
+
+    public static Button resultButton;
+
+
+    public static Button resultTo;
+
+    TextView calculation;
+    TextView result;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +105,241 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
         currencyText = (TextView) findViewById(R.id.currencyText);
         currencyText.setText("1 Euro equals " + rateUSD.toString() + " US dollar");
+
+
+        oneIcon = (Button) findViewById(R.id.oneIcon);
+        twoIcon = (Button) findViewById(R.id.twoIcon);
+        threeIcon = (Button) findViewById(R.id.threeIcon);
+        fourIcon = (Button) findViewById(R.id.fourIcon);
+
+        fiveIcon = (Button) findViewById(R.id.fiveIcon);
+        sixIcon = (Button) findViewById(R.id.sixIcon);
+        sevenIcon = (Button) findViewById(R.id.sevenIcon);
+        eightIcon = (Button) findViewById(R.id.eightIcon);
+
+        nineIcon = (Button) findViewById(R.id.nineIcon);
+        zeroIcon = (Button) findViewById(R.id.zeroIcon);
+        clearIcon = (Button) findViewById(R.id.clearIcon);
+        commaIcon = (Button) findViewById(R.id.commaIcon);
+
+        addIcon = (Button) findViewById(R.id.addIcon);
+        minusIcon = (Button) findViewById(R.id.minusIcon);
+        divisionIcon = (Button) findViewById(R.id.divisionIcon);
+        multiIcon = (Button) findViewById(R.id.multiIcon);
+
+        resultButton = (Button) findViewById(R.id.resultBtn);
+
+        resultTo = (Button) findViewById(R.id.resultTo);
+
+
+        calculation = (TextView) findViewById(R.id.calculation);
+        result = (TextView) findViewById(R.id.result);
+
+
+        oneIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "1");
+            }
+        });
+        twoIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "2");
+
+            }
+        });
+        threeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "3");
+            }
+        });
+        fourIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "4");
+            }
+        });
+
+        fiveIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "5");
+            }
+        });
+        sixIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "6");
+            }
+        });
+        sevenIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "7");
+            }
+        });
+        eightIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculation.setText(calculation.getText().toString() + "8");
+
+            }
+        });
+        nineIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "9");
+            }
+        });
+        zeroIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calculation.setText(calculation.getText().toString() + "0");
+            }
+        });
+
+        clearIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (calculation.getText().length() > 0) {
+                    CharSequence name = calculation.getText().toString();
+                    calculation.setText(name.subSequence(0, name.length() - 1));
+                } else {
+                    val1 = Double.NaN;
+                    val2 = Double.NaN;
+                    calculation.setText(null);
+                    result.setText(null);
+                }
+            }
+        });
+
+        clearIcon.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                val1 = Double.NaN;
+                val2 = Double.NaN;
+                calculation.setText(null);
+                result.setText(null);
+
+                setEnableNumbersAndComma(true);
+
+                return true;
+            }
+        });
+
+        commaIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!calculation.getText().toString().contains(".")) {
+                    calculation.setText(calculation.getText().toString() + ".");
+                }
+
+            }
+        });
+
+        addIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (calculation.getText() != "" || result.getText().toString().contains("=")) {
+                    compute();
+                    ACTION = ADDITION;
+                    result.setText(String.valueOf(val1) + "+");
+                    calculation.setText(null);
+
+                    setEnableNumbersAndComma(true);
+
+                }
+
+            }
+        });
+        minusIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (calculation.getText() != "" || result.getText().toString().contains("=")) {
+                    compute();
+                    ACTION = SUBTRACTION;
+                    result.setText(String.valueOf(val1) + "-");
+                    calculation.setText(null);
+
+                    setEnableNumbersAndComma(true);
+
+                }
+            }
+        });
+        multiIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (calculation.getText() != "" || result.getText().toString().contains("=")) {
+                    compute();
+                    ACTION = MULTIPLICATION;
+                    result.setText(String.valueOf(val1) + "*");
+                    calculation.setText(null);
+
+                    setEnableNumbersAndComma(true);
+
+                }
+            }
+        });
+        divisionIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (calculation.getText() != "" || result.getText().toString().contains("=")) {
+                    compute();
+                    ACTION = DIVISION;
+                    result.setText(String.valueOf(val1) + "/");
+                    calculation.setText(null);
+
+                    setEnableNumbersAndComma(true);
+
+                }
+
+            }
+        });
+
+        resultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (calculation.getText() != "" && !result.getText().toString().contains("=")) {
+                    compute();
+                    ACTION = EQU;
+                    result.setText(result.getText().toString() + String.valueOf(val2) + " = " + String.valueOf(val1));
+                    calculation.setText(String.valueOf(val1));
+
+                    setEnableNumbersAndComma(false);
+                }
+            }
+        });
+
+        resultTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (result.getText().toString() != "") {
+
+                    valueCurrencyOne.setText(String.valueOf(val1));
+                    valueCurrencyTwo.setText(currencyConversion(Double.parseDouble(String.valueOf(val1)), currencyOne, currencyTwo).toString());
+
+                }
+            }
+        });
 
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -118,11 +391,7 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
 
                 intent.putExtra("EXTRA_BUTTON", "buttonCurrencyTwo");
 
-               /* Drawable myDrawable = getResources().getDrawable(R.drawable.dollar);
-                int h = myDrawable.getIntrinsicHeight();
-                int w = myDrawable.getIntrinsicWidth();
-                myDrawable.setBounds( 0 , 0, 0, 0 );
-                buttonCurrencyTwo.setCompoundDrawables(null, null, null, null);*/
+
                 startActivity(intent);
             }
         });
@@ -171,6 +440,48 @@ public class MainActivity extends AppCompatActivity implements RequestOperator.R
                 }
             }
         });
+    }
+
+
+    private void setEnableNumbersAndComma(Boolean bool) {
+        zeroIcon.setEnabled(bool);
+        oneIcon.setEnabled(bool);
+        twoIcon.setEnabled(bool);
+        threeIcon.setEnabled(bool);
+        fourIcon.setEnabled(bool);
+        fiveIcon.setEnabled(bool);
+        sixIcon.setEnabled(bool);
+        sevenIcon.setEnabled(bool);
+        eightIcon.setEnabled(bool);
+        nineIcon.setEnabled(bool);
+
+        commaIcon.setEnabled(bool);
+
+    }
+
+    private void compute() {
+        if (!Double.isNaN(val1)) {
+            val2 = Double.parseDouble(calculation.getText().toString());
+
+            switch (ACTION) {
+                case ADDITION:
+                    val1 = val1 + val2;
+                    break;
+                case SUBTRACTION:
+                    val1 = val1 - val2;
+                    break;
+                case MULTIPLICATION:
+                    val1 = val1 * val2;
+                    break;
+                case DIVISION:
+                    val1 = val1 / val2;
+                    break;
+                case EQU:
+                    break;
+            }
+        } else {
+            val1 = Double.parseDouble(calculation.getText().toString());
+        }
     }
 
 

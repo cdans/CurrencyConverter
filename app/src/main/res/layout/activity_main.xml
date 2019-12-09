@@ -6,148 +6,396 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/buttonCurrencyOne"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_default"
-            android:drawableLeft="@android:drawable/ic_menu_add"
-            android:text="Euro"
-            android:textColor="#F9F9F9" />
-
-        <Button
-            android:id="@+id/buttonCurrencyTwo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_default"
-            android:drawableRight="@android:drawable/ic_menu_add"
-            android:text="US dollar"
-            android:textColor="#F9F9F9" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/valueCurrencyOne"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="#7CE282"
-            android:textColorHint="@color/colorPrimary"
-            android:textColorLink="@color/colorPrimary"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/valueCurrencyTwo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="#7CE282"
-            android:textColorHint="@color/colorPrimary"
-            android:textColorLink="@color/colorPrimary"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/currencyText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="1 Euro equals 1.1 US dollar"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="#388E3C"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/secondActivityButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/button_default"
-            android:text="@string/secondActivityButton"
-            android:textColor="#F9F9F9" />
-    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-
-                android:id="@+id/send_request"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@drawable/button"
-                android:text="@string/send_request"
-                android:textColor="#F9F9F9" />
+                android:orientation="horizontal">
 
-            <Button
+                <Button
+                    android:id="@+id/buttonCurrencyOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:drawableLeft="@android:drawable/ic_menu_add"
+                    android:text="Euro"
+                    android:textColor="#F9F9F9" />
 
-                android:id="@+id/lab3"
+                <Button
+                    android:id="@+id/buttonCurrencyTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:drawableRight="@android:drawable/ic_menu_add"
+                    android:text="US dollar"
+                    android:textColor="#F9F9F9" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@drawable/button"
-                android:text="Lab 3"
-                android:textColor="#F9F9F9" />
+                android:orientation="horizontal">
 
+                <EditText
+                    android:id="@+id/valueCurrencyOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHighlight="#7CE282"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="@style/Widget.AppCompat.ProgressBar"
-                android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/valueCurrencyTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHighlight="#7CE282"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginBottom="80dp"
-                android:foregroundTint="#F9F9F9"
-                android:indeterminateTint="#F9F9F9"
-                android:maxHeight="48dp"
-                android:minHeight="50dp"
-                android:mirrorForRtl="false"
-                android:progressTint="#F9F9F9"
-                android:visibility="invisible" />
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/currencyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="1 Euro equals 1.1 US dollar"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHighlight="#388E3C"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/calculation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHighlight="#388E3C"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHighlight="#388E3C"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/sevenIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="7"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/eightIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="8"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/nineIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="9"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/divisionIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="÷"
+                    android:textColor="#F9F9F9" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/fourIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="4"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/fiveIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="5"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/sixIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="6"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/multiIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="×"
+                    android:textColor="#F9F9F9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/oneIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="1"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/twoIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="2"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/threeIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="3"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/minusIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="-"
+                    android:textColor="#F9F9F9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/clearIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="C"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/zeroIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="0"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/commaIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="."
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/addIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:text="+"
+                    android:textColor="#F9F9F9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/resultBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_default"
+                    android:text="="
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/resultTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_default"
+                    android:text="Result to Euro"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+                    android:id="@+id/secondActivityButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_default"
+                    android:text="@string/secondActivityButton"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+
+                    android:id="@+id/send_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button"
+                    android:text="@string/send_request"
+                    android:textColor="#F9F9F9" />
+
+                <Button
+
+                    android:id="@+id/lab3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button"
+                    android:text="Lab 3"
+                    android:textColor="#F9F9F9" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:layout_marginBottom="80dp"
+                    android:foregroundTint="#F9F9F9"
+                    android:indeterminateTint="#F9F9F9"
+                    android:maxHeight="48dp"
+                    android:minHeight="50dp"
+                    android:mirrorForRtl="false"
+                    android:progressTint="#F9F9F9"
+                    android:visibility="invisible" />
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

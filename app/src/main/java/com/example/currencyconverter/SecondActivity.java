@@ -25,11 +25,11 @@ public class SecondActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate (Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
-        setContentView (R.layout.secondactivitydesign);
+        setContentView(R.layout.secondactivitydesign);
         myListView = (ListView) findViewById(R.id.listView);
         addButton = (ImageButton) findViewById(R.id.addButton);
         searchView = (SearchView) findViewById(R.id.searchViewCurrencies);
@@ -65,22 +65,17 @@ public class SecondActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                if (currencies.get(position).getCode()==null){
+                if (currencies.get(position).getCode() == null) {
                     Currency currency = currencies.get(position);
                     mDb.currencyDao().delete(currency);
 
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
-
-                   // myListView.setAdapter(adapter);
+                    currencies.remove(position);
+                    myListView.setAdapter(adapter);
                 }
 
                 return true;
             }
         });
-
-
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
