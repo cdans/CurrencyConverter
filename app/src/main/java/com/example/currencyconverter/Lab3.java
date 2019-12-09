@@ -70,6 +70,8 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
     private TextView zValue;
 
     private TextView orientation;
+
+    private TextView netCoordinates;
     private TextView coordinates;
 
     private boolean InformationObtained;
@@ -98,11 +100,15 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
 
+    private LocationManager locationManagerNET;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab3);
+
+        locationManagerNET = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         InformationObtained = false;
 
@@ -117,6 +123,7 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
         zValue = (TextView) findViewById(R.id.z_value);
 
         coordinates = (TextView) findViewById(R.id.coordinates);
+        netCoordinates = (TextView) findViewById(R.id.netCoordinates);
         orientation = (TextView) findViewById(R.id.orientation);
 
         senSensorManger = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -137,6 +144,23 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
             }
         });
     }
+
+    LocationListener networkLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            if (location != null) {
+                netCoordinates.setText(getString(R.string.Latitude_text) + " "
+                        + location.getLatitude() + "\n" + getString(R.string.Longitude_text) + " " + location.getLongitude());            }
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+        public void onProviderEnabled(String provider) {
+        }
+
+        public void onProviderDisabled(String provider) {
+        }
+    };
 
 
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
@@ -510,6 +534,7 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
     protected void onResume() {
         super.onResume();
 
+
         //Camera part
         startBackgroundThread();
         if (textureView.isAvailable()) {
@@ -528,6 +553,10 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
             return;
         }
 
+
+        //Network
+        this.locationManagerNET.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 200, 1, networkLocationListener);
+        //GPS
         this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, Lab3.this);
     }
 
@@ -535,7 +564,7 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
     public void onLocationChanged(Location location) {
         if (location != null) {
             coordinates.setText(getString(R.string.Latitude_text) + " "
-                    + location.getLatitude() + " " + getString(R.string.Longitude_text) + " " + location.getLongitude());
+                    + location.getLatitude() + "\n" + getString(R.string.Longitude_text) + " " + location.getLongitude());
 
             System.out.println(location.getLatitude());
             System.out.println(location.getLongitude());

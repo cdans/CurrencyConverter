@@ -19,8 +19,9 @@
     <string name="stop">Stop</string>
     <string name="orientation">Orientation</string>
     <string name="compass">Compass</string>
-    <string name="coordinates_text">Coordinates:</string>
+    <string name="coordinates_text">GPS-Coordinates:</string>
     <string name="Latitude_text">Latitude</string>
     <string name="Longitude_text">Longitude</string>
+    <string name="netCoordinates_text">Net-Coordinates:</string>
 
 </resources>
