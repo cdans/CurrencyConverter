@@ -36,6 +36,7 @@ import android.util.SparseArray;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,6 +73,13 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
     private TextView xValue;
     private TextView yValue;
     private TextView zValue;
+
+    private float oldX;
+    private float oldY;
+    private float oldZ;
+
+    private long lastUpdate;
+    private float moveThreshold;
 
     private TextView orientation;
 
@@ -198,7 +206,13 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
             thread1.start();
         }
 
+        lastUpdate = 0L;
 
+        oldX = 0L;
+        oldY = 0L;
+        oldZ = 0L;
+
+        moveThreshold = 0.2f;
     }
 
 
@@ -530,40 +544,75 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
     public void onSensorChanged(SensorEvent event) {
         Sensor mySensor = event.sensor;
 
+        long curTime = System.currentTimeMillis();
+
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
-            double x = event.values[0];
-            double y = event.values[1];
-            double z = event.values[2];
-            xValue.setText(String.valueOf(x));
-            yValue.setText(String.valueOf(y));
-            zValue.setText(String.valueOf(z));
+            if ((curTime - lastUpdate) > 100) {
+                lastUpdate = curTime;
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
 
-            //right down
-            if (x < -8) {
-                orientation.setText("right down");
-            }
-            //left down
-            else if (x > 8) {
-                orientation.setText("left down");
-            }
-            //top down
-            else if (y < -8) {
-                orientation.setText("top down");
-            }
-            //bottom down
-            else if (y > 8) {
-                orientation.setText("bottom down");
-            }
-            //screen down
-            else if (z < -8) {
-                orientation.setText("screen down");
-            }
-            //screen up
-            else if (z > 8) {
-                orientation.setText("screen up");
+
+                if ((Math.abs(x - oldX) > moveThreshold) || (Math.abs(y - oldY) > moveThreshold) || (Math.abs(z - oldZ) > moveThreshold)) {
+                    oldX = x;
+                    oldY = y;
+                    oldZ = z;
+
+
+                    xValue.setText(String.valueOf(x));
+                    yValue.setText(String.valueOf(y));
+                    zValue.setText(String.valueOf(z));
+
+                    adjustBrightness(y);
+
+                    //right down
+                    if (x < -8) {
+                        orientation.setText("right down");
+                    }
+                    //left down
+                    else if (x > 8) {
+                        orientation.setText("left down");
+                    }
+                    //top down
+                    else if (y < -8) {
+                        orientation.setText("top down");
+                    }
+                    //bottom down
+                    else if (y > 8) {
+                        orientation.setText("bottom down");
+                    }
+                    //screen down
+                    else if (z < -8) {
+                        orientation.setText("screen down");
+                    }
+                    //screen up
+                    else if (z > 8) {
+                        orientation.setText("screen up");
+                    }
+
+                }
+
+
             }
         }
+    }
+
+    public void adjustBrightness(float x) {
+        WindowManager.LayoutParams layout = getWindow().getAttributes();
+        if (x >= 10) layout.screenBrightness = 1F;
+        else if (x > 9) layout.screenBrightness = 0.9F;
+        else if (x > 8) layout.screenBrightness = 0.8F;
+        else if (x > 7) layout.screenBrightness = 0.7F;
+        else if (x > 6) layout.screenBrightness = 0.6F;
+        else if (x > 5) layout.screenBrightness = 0.5F;
+        else if (x > 4) layout.screenBrightness = 0.4F;
+        else if (x > 3) layout.screenBrightness = 0.3F;
+        else if (x > 2) layout.screenBrightness = 0.2F;
+        else if (x > 1) layout.screenBrightness = 0.1F;
+        else if (x > 0) layout.screenBrightness = 0F;
+        getWindow().setAttributes(layout);
     }
 
     @Override
