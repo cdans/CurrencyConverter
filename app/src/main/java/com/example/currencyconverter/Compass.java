@@ -1,11 +1,11 @@
 package com.example.currencyconverter;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -88,24 +88,11 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
                 compass.startAnimation(anim);
 
                 if (currentAzimuth > 359 || currentAzimuth < 1) {
-                    System.out.println("dadadadadadadadadadadadada" + currentAzimuth);
 
-
+                    Intent intent = new Intent(this, Lab3.class);
+                    intent.putExtra("triggerPic", 11);
+                    startActivity(intent);
                     finish();
-                    Thread thread2 = new Thread() {
-                        public void run() {
-                            try {
-                                Thread.sleep(3000);
-                            } catch (InterruptedException e) {
-                            }
-                            Looper.prepare();
-                            Lab3 photo = new Lab3();
-                            photo.takePicture();
-                        }
-                    };
-
-                    thread2.start();
-
                 }
             }
         }

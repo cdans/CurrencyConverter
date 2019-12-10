@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -36,6 +37,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +56,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class Lab3 extends AppCompatActivity implements SensorEventListener, LocationListener {
 
@@ -102,11 +106,14 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
 
     private LocationManager locationManagerNET;
 
+    private ImageView picScreen;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab3);
+
+        picScreen = (ImageView) findViewById(R.id.picScreen);
 
         locationManagerNET = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -140,16 +147,67 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
         takePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 takePicture();
+                // Update ImageView
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    String pathName = Environment.getExternalStorageDirectory() + "/pic.jpg";
+                    Drawable d = Drawable.createFromPath(pathName);
+                    picScreen.setImageDrawable(d);
+                }
             }
         });
+
+
+        Intent intent = getIntent();
+        int trigger = intent.getIntExtra("triggerPic", 0);
+        System.out.println(trigger);
+        if (trigger == 11) {
+            Thread thread1 = new Thread() {
+                public void run() {
+                    try {
+                        sleep(2000);
+                        takePicture();
+
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                // Update ImageView
+                                try {
+                                    sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    String pathName = Environment.getExternalStorageDirectory() + "/pic.jpg";
+                                    Drawable d = Drawable.createFromPath(pathName);
+                                    picScreen.setImageDrawable(d);
+                                }
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            thread1.start();
+        }
+
+
     }
+
 
     LocationListener networkLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
             if (location != null) {
                 netCoordinates.setText(getString(R.string.Latitude_text) + " "
-                        + location.getLatitude() + "\n" + getString(R.string.Longitude_text) + " " + location.getLongitude());            }
+                        + location.getLatitude() + "\n" + getString(R.string.Longitude_text) + " " + location.getLongitude());
+            }
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -263,12 +321,13 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
                 final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
                 captureBuilder.addTarget(reader.getSurface());
                 //Overall mode of 3A
-                captureBuilder.set(CaptureRequest.CONTROL_AE_MODE, CameraMetadata.CONTROL_MODE_AUTO);
+                captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
                 // Orientation
                 int rotation = getWindowManager().getDefaultDisplay().getRotation();
-                captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, (int) ORIENTATIONS.get(rotation));
+                captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, (Integer) ORIENTATIONS.get(rotation));
                 //Output file
                 final File file = new File(Environment.getExternalStorageDirectory() + "/pic.jpg");
+
 
                 ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                     @Override
@@ -434,6 +493,8 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
                 startAndStop.setText(getString(R.string.stop));
                 InformationObtained = true;
             }
+
+
         }
     };
 

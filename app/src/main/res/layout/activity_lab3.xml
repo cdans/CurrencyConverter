@@ -168,6 +168,12 @@
                 android:text="@string/compass"
                 android:textColor="#F9F9F9" />
 
+            <ImageView
+                android:id="@+id/picScreen"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:srcCompat="@drawable/comingsoon" />
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="500dp">
