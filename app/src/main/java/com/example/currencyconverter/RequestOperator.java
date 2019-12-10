@@ -105,6 +105,9 @@ public class RequestOperator extends Thread {
                 Double rate = rates.getDouble(code);
                 currencies.get(i).setRate(rate);
 
+                String title = currencies.get(i).getTitle();
+                currencies.get(i).setDescription(rate + " " + title + " are 1 Euro.");
+
                 Currency updatedC = currencies.get(i);
                 HomeActivity.mDb.currencyDao().update(updatedC);
             }

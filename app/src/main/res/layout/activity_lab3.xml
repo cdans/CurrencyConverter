@@ -172,7 +172,8 @@
                 android:id="@+id/picScreen"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                app:srcCompat="@drawable/comingsoon" />
+                android:rotation="270"
+                app:srcCompat="@drawable/circle_background" />
 
             <FrameLayout
                 android:layout_width="match_parent"

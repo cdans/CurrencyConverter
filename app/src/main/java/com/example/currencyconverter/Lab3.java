@@ -514,13 +514,13 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-       /* if (requestCode == 1
+        if (requestCode == 1
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             //   gps functions.
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, Lab3.this);
             startAndStop.setText("stop");
             InformationObtained = true;
-        }*/
+        }
 
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
@@ -586,6 +586,11 @@ public class Lab3 extends AppCompatActivity implements SensorEventListener, Loca
                     //screen down
                     else if (z < -8) {
                         orientation.setText("screen down");
+
+                        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                        homeIntent.addCategory( Intent.CATEGORY_HOME );
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(homeIntent);
                     }
                     //screen up
                     else if (z > 8) {
